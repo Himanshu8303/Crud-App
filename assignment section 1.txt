@@ -1,0 +1,130 @@
+1. Controlled vs. Uncontrolled Components in React
+Controlled Components: Here the form data is controlled by React state. The form inputs in such components are bound to the state of the component. That means the input values are set using state and updated using onChange events. This controls the form data and allows validation in a better way.
+
+Uncontrolled Components: Here, the form data is handled directly by the DOM itself and not by React state. You use refs to get the values directly from the DOM. It would be easier for small forms, but you wouldn't have the same level of control that you would have in controlled components.
+
+
+2. What are Functional Components and Hooks?
+Functional components These are simpler, stateless components in React that depend on props and are therefore generally easier to read and test compared to class components. They promote a more functional style of programming and can leverage hooks to implement state as well as lifecycles.
+
+Hooks:
+
+useState : a hook which lets you add some local state to functional components. You call it with the initial state, and it returns an array with the current state and a function to update it.
+
+const [count, setCount] = useState(0);
+useEffect : It is a kind of hook by which you can execute side effects in functional components. You can use it for fetching data, for subscriptions, or even for manually changing DOMs. It is called after render, and you can set it to run based on dependencies.
+
+useEffect(() => {
+
+}, [dependencies]);
+useRef: An in-built hook creating a mutable ref object that persists for the full lifetime of the component. It allows for direct access to DOM elements or values that do not trigger any re-renders.
+ 
+const inputRef = useRef(null);
+
+
+3. Redux Toolkit and Prop Drilling
+Redux Toolkit: A library simplifying the development of Redux, providing tools to get rid of boilerplate, including state slices and reducers, it provides built-in middleware for async operations and makes state management more efficient in large applications.
+
+Prop Drilling: The passing of data through multiple layers of components can be really cumbersome and hard to maintain. It would be advisable to avoid prop drilling, especially as you use state management libraries like Redux or Context API, whereby you can share states across components, never having to manually pass props down.
+
+
+4. CSS Box Model
+Box Model: A CSS box model refers to how box elements on a webpage are measured. Each element is considered a rectangular box that consists of margins, borders, padding, and the content area itself. The better you understand the box model, the greater control you'll have over space and layout.
+
+Custom Scrollbars: You can create custom scrollbars by using CSS and targeting the ::-webkit-scrollbar pseudo-element and its associated properties:
+
+stylesheet
+::-webkit-scrollbar
+width: 12px;
+}
+ 
+::-webkit-scrollbar-thumb {
+ background-color: darkgrey;
+ border-radius: 10px;
+}
+
+
+5. Callback Hell
+Callback Hell: This is the state in which a number of nested callbacks create code that is messy and difficult to read, sort of like pyramidic structures. Usually happens with asynchronous operations.
+ 
+To avoid Callback Hell: You may avoid this with Promises, async/await or break your code into functions. In this case, the structure is flattened and readability improves:
+ 
+async function fetchData() {
+ try
+const data1 = await fetch(url1); end
+const data2 = await fetch(url2); end
+const data3 = await fetch(url3); end
+} catch {
+  console.error(error);
+}
+
+
+
+6. Closures: A closure is a function that retains access to its lexical scope, even when that function is executed outside its original scope. This means inner functions can access outer function variables even after the outer function has finished executing.
+
+Real-world Example: Closures can be useful in creating private variables:
+
+function createCounter() {
+  let count = 0;
+  return {
+    increment: function()
+count++;
+      return count;
+    },
+    decrement: function() {
+      count--;
+      return count;
+    }
+  };
+}
+
+const counter = createCounter();
+console.log(counter.increment()); // 1
+console.log(counter.increment()); // 2
+console.log(counter.decrement()); // 1
+
+
+7. Event Loop in JavaScript
+Event Loop : It is a fundamental part of JavaScript's concurrency model to support non-blocking code execution. An event loop executes code, collects and processes events and runs the subtasks queued.
+
+Importance: This is what makes JavaScript perform asynchronous operations (such as handling events, making API calls) without really blocking the thread, which actually provides a seamless user experience.
+
+
+8. Function Making Asynchronous Calls Using Promises
+This is how you would write a function which returns three calls to fetch in sequence:
+
+function fetchSequentially() {
+  return fetch(url1)
+    .then(response => response.json())
+    .then(data1 => {
+      console.log(data1);
+      return fetch(url2);
+    })
+    .then(response => response.json())
+    .then(data2 => {
+return fetch(url3);
+    })
+    .then(response => response.json())
+    .then(data3 => {
+      console.log(data3);
+    })
+    .catch(error => console.error("Error:", error));
+
+
+9. A few new features were added in ES6, enhancing the capabilities of JavaScript:
+
+Arrow FunctionsAbstraction for writing functions with preserved value of this context.
+
+const add = (a, b) => a + b;
+Template LiteralsExtended string literals allowing for the placement of expressions, possible to span several lines.
+
+const name = "World";
+const greeting = `Hello, ${name}! `;
+Destructuring AssignmentThe neat way to extract values from arrays, or properties from objects.
+
+Console output
+const arr = [1, 2, 3 ];
+const [one, two] = arr;
+
+const obj = {x: 1, y: 2}; 
+const {x, y} = obj;
